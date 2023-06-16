@@ -1,15 +1,12 @@
-#include <iostream>
-#include "headers/Game.h"
-
-const int WINDOW_WIDTH = 500;
-const int WINDOW_HEIGHT = 500;
-const std::string WINDOW_NAME = "Breakout";
+#include "Engine/headers/Game.h"
+#include "Game/headers/Constants.h"
+#include "Game/headers/Paddle.h"
 
 int main() {
     Game game(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME);
 
-    Object object(50, 50, sf::Color::White);
-    game.AddObject(&object);
+    Paddle paddle;
+    game.AddObject(&paddle);
 
     game.Run();
 }

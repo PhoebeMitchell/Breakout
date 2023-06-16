@@ -3,9 +3,8 @@
 //
 
 #include "../headers/Game.h"
-#include "../headers/Time.h"
 
-const int GRAVITY = 10;
+const int GRAVITY = 0;
 
 Game::Game(int windowWidth, int windowHeight, std::string windowName) : _window(windowWidth, windowHeight, windowName), _physics({0, GRAVITY}) {
 
@@ -25,6 +24,7 @@ void Game::Run() {
         _physics.Step(&time);
         for (auto object : _objects) {
             object->DrawToWindow(&_window);
+            object->Update(&time);
         }
         _window.Display();
     }

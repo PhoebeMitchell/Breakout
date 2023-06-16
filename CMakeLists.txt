@@ -8,6 +8,6 @@ find_package(SFML 2.5 COMPONENTS system window graphics REQUIRED)
 include_directories(${CMAKE_SOURCE_DIR}/include)
 link_directories(${CMAKE_SOURCE_DIR}/lib)
 
-add_executable(Breakout main.cpp src/Physics.cpp headers/Physics.h src/Window.cpp headers/Window.h src/Game.cpp headers/Game.h src/Object.cpp headers/Object.h src/Time.cpp headers/Time.h)
+add_executable(Breakout main.cpp Engine/src/Physics.cpp Engine/headers/Physics.h Engine/src/Window.cpp Engine/headers/Window.h Engine/src/Game.cpp Engine/headers/Game.h Engine/src/Object.cpp Engine/headers/Object.h Engine/src/Time.cpp Engine/headers/Time.h Game/src/Paddle.cpp Game/headers/Paddle.h Game/headers/Constants.h)
 target_link_libraries(Breakout PRIVATE box2d-lite sfml-system sfml-window sfml-graphics)
 

@@ -17,6 +17,7 @@ public:
 
     void AddBody(Body *body);
     void Step(Time *time);
+    static float PixelsToUnits(float pixels);
 private:
     World _world;
 };

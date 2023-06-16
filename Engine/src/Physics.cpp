@@ -17,3 +17,7 @@ void Physics::AddBody(Body *body) {
 void Physics::Step(Time *time) {
     _world.Step(time->GetTimeDelta());
 }
+
+float Physics::PixelsToUnits(float pixels) {
+    return pixels / PIXELS_PER_UNIT;
+}

@@ -4,8 +4,9 @@
 
 int main() {
     Game game(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME);
+    auto physics = game.GetPhysics();
 
-    Paddle paddle;
+    Paddle paddle(physics->GetWorld());
     game.AddObject(&paddle);
 
     game.Run();

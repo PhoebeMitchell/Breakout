@@ -7,16 +7,18 @@
 
 const sf::Color COLOR = sf::Color::White;
 
-Paddle::Paddle() : Object(WIDTH, HEIGHT, COLOR) {
+Paddle::Paddle(b2World *world) : Object(WIDTH, HEIGHT, COLOR) {
+    AddBody(world, b2_dynamicBody, 1);
     SetPosition({Physics::PixelsToUnits(WINDOW_WIDTH / 2.0f), Physics::PixelsToUnits(WINDOW_HEIGHT)});
     SetOrigin(ORIGIN);
 }
 
 void Paddle::Update(Time *time) {
-    GetBody()->velocity = {0, 0};
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        GetBody()->velocity = {-SPEED, 0};
+        GetBody()->SetVelocity({-SPEED, 0});
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        GetBody()->velocity = {SPEED, 0};
+        GetBody()->SetVelocity({SPEED, 0});
+    } else {
+        GetBody()->SetVelocity({0, 0});
     }
 }

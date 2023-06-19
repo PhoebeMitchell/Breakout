@@ -6,9 +6,10 @@
 #define BREAKOUT_OBJECT_H
 
 #include <SFML/Graphics.hpp>
-#include "box2d-lite/Body.h"
+#include "box2d/box2d.h"
 #include "Physics.h"
 #include "Window.h"
+#include "Body.h"
 
 class Object {
 public:
@@ -16,15 +17,14 @@ public:
 
     void DrawToWindow(Window *window);
     virtual void Update(Time *time) = 0;
-    void AddToPhysicsWorld(Physics *physics);
-    void SetOrigin(Vec2 origin);
-    void SetPosition(Vec2 position);
-    Vec2 GetPosition();
-protected:
+    void SetOrigin(b2Vec2 origin);
+    void SetPosition(b2Vec2 position);
+    void AddBody(b2World *world, b2BodyType bodyType, float mass);
+    b2Vec2 GetPosition();
     Body *GetBody();
 private:
-    Body _body;
-    Vec2 _origin;
+    b2Vec2 _origin = {0, 0};
+    std::unique_ptr<Body> _body;
     sf::RectangleShape _rectangleShape;
 };
 

@@ -16,6 +16,7 @@ public:
     Game(int windowWidth, int windowHeight, std::string windowName);
     void Run();
     void AddObject(Object *object);
+    Physics *GetPhysics();
 private:
     Physics _physics;
     Window _window;

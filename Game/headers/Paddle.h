@@ -10,14 +10,14 @@
 
 class Paddle : public Object {
 public:
-    Paddle();
+    Paddle(b2World *world);
 
     void Update(Time *time) override;
 private:
     const float SPEED = 5;
     static constexpr float WIDTH = 2;
     static constexpr float HEIGHT = 0.4f;
-    const Vec2 ORIGIN = {0.5, 1};
+    const b2Vec2 ORIGIN = {0.5, 1};
 };
 
 

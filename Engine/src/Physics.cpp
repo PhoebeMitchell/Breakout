@@ -4,20 +4,18 @@
 
 #include "../headers/Physics.h"
 
-const int PHYSICS_ITERATIONS = 60;
+Physics::Physics(b2Vec2 gravity) : _world(gravity) {
 
-Physics::Physics(Vec2 gravity) : _world(gravity, PHYSICS_ITERATIONS) {
-
-}
-
-void Physics::AddBody(Body *body) {
-    _world.Add(body);
 }
 
 void Physics::Step(Time *time) {
-    _world.Step(time->GetTimeDelta());
+    _world.Step(time->GetTimeDelta(), 8, 3);
 }
 
 float Physics::PixelsToUnits(float pixels) {
     return pixels / PIXELS_PER_UNIT;
+}
+
+b2World *Physics::GetWorld() {
+    return &_world;
 }

@@ -5,21 +5,20 @@
 #ifndef BREAKOUT_PHYSICS_H
 #define BREAKOUT_PHYSICS_H
 
-#include "box2d-lite/MathUtils.h"
-#include "box2d-lite/World.h"
+#include "box2d/box2d.h"
 #include "Time.h"
 
 class Physics {
 public:
-    Physics(Vec2 gravity);
+    Physics(b2Vec2 gravity);
 
     const static int PIXELS_PER_UNIT = 64;
 
-    void AddBody(Body *body);
     void Step(Time *time);
     static float PixelsToUnits(float pixels);
+    b2World *GetWorld();
 private:
-    World _world;
+    b2World _world;
 };
 
 

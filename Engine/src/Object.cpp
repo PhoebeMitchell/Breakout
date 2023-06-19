@@ -8,33 +8,32 @@
 Object::Object(float width, float height, sf::Color color) {
     _rectangleShape.setSize(sf::Vector2f(width * Physics::PIXELS_PER_UNIT, height * Physics::PIXELS_PER_UNIT));
     _rectangleShape.setFillColor(color);
-    _body.Set({width / Physics::PIXELS_PER_UNIT, height / Physics::PIXELS_PER_UNIT}, 1);
-}
-
-void Object::AddToPhysicsWorld(Physics *physics) {
-    physics->AddBody(&_body);
 }
 
 void Object::DrawToWindow(Window *window) {
-    _rectangleShape.setPosition(_body.position.x * Physics::PIXELS_PER_UNIT, _body.position.y * Physics::PIXELS_PER_UNIT);
+    _rectangleShape.setPosition(_body->GetPosition().x * Physics::PIXELS_PER_UNIT, _body->GetPosition().y * Physics::PIXELS_PER_UNIT);
     window->Draw(&_rectangleShape);
 }
 
-Body *Object::GetBody() {
-    return &_body;
-}
-
-void Object::SetOrigin(Vec2 origin) {
+void Object::SetOrigin(b2Vec2 origin) {
     auto rectangleShapeSize = _rectangleShape.getSize();
     _origin = {origin.x * Physics::PixelsToUnits(rectangleShapeSize.x), origin.y * Physics::PixelsToUnits(rectangleShapeSize.y)};
-    _rectangleShape.setOrigin(_origin.x, origin.y);
-    SetPosition(_body.position);
+    _rectangleShape.setOrigin(origin.x, origin.y);
+    SetPosition(_body->GetPosition());
 }
 
-void Object::SetPosition(Vec2 position) {
-    _body.position = position - _origin;
+void Object::SetPosition(b2Vec2 position) {
+    _body->SetPosition(position - _origin);
 }
 
-Vec2 Object::GetPosition() {
-    return _body.position + _origin;
+void Object::AddBody(b2World *world, b2BodyType bodyType, float mass) {
+    _body = std::make_unique<Body>(world, _rectangleShape.getSize().x, _rectangleShape.getSize().y, bodyType, mass);
+}
+
+b2Vec2 Object::GetPosition() {
+    return _body->GetPosition() + _origin;
+}
+
+Body *Object::GetBody() {
+    return _body.get();
 }

@@ -10,9 +10,12 @@ Game::Game(int windowWidth, int windowHeight, std::string windowName) : _window(
 
 }
 
+Physics *Game::GetPhysics() {
+    return &_physics;
+}
+
 void Game::AddObject(Object *object) {
     _objects.push_back(object);
-    object->AddToPhysicsWorld(&_physics);
 }
 
 void Game::Run() {

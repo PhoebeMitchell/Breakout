@@ -18,6 +18,9 @@ public:
     static float PixelsToUnits(float pixels);
     b2World *GetWorld();
 private:
+    const float TIME_STEP = 1/60;
+
+    float previousStepTime = 0;
     b2World _world;
 };
 

@@ -7,11 +7,12 @@
 
 Body::Body(b2World *world, float width, float height, b2BodyType bodyType, float mass) {
     _bodyDef.type = bodyType;
+    _bodyDef.bullet = true;
     _body = world->CreateBody(&_bodyDef);
-    _shape.SetAsBox(width / 2, height / 2);
+    _shape.SetAsBox(width, height);
     b2FixtureDef fixtureDef;
     fixtureDef.density = mass / (width * height);
-    fixtureDef.friction = 0;
+    fixtureDef.friction = 1;
     fixtureDef.shape = &_shape;
     _body->CreateFixture(&fixtureDef);
 }

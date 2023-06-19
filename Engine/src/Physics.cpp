@@ -9,7 +9,10 @@ Physics::Physics(b2Vec2 gravity) : _world(gravity) {
 }
 
 void Physics::Step(Time *time) {
-    _world.Step(time->GetTimeDelta(), 8, 3);
+    if (time->GetCurrentTime() >= previousStepTime + TIME_STEP) {
+        previousStepTime = time->GetCurrentTime();
+        _world.Step(time->GetTimeDelta(), 8, 3);
+    }
 }
 
 float Physics::PixelsToUnits(float pixels) {

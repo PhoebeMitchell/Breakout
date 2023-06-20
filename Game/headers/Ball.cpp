@@ -7,11 +7,11 @@
 
 const float RADIUS = 0.2f;
 const sf::Color COLOR = sf::Color::White;
-const b2Vec2 INITIAL_VELOCITY = {0.25, 1};
+const b2Vec2 INITIAL_VELOCITY = {0, 1};
 const float SPEED = 3;
 
 Ball::Ball(b2World *world) : Object(RADIUS, RADIUS, COLOR) {
-    AddBody(world, b2_dynamicBody, 1);
+    AddBody(world, b2_dynamicBody, 1, {0, 0});
     SetPosition({Physics::PixelsToUnits(WINDOW_WIDTH / 2), Physics::PixelsToUnits(WINDOW_HEIGHT / 2)});
     auto velocity = INITIAL_VELOCITY;
     velocity.Normalize();

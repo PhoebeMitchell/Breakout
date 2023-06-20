@@ -8,8 +8,8 @@
 const sf::Color COLOR = sf::Color::White;
 
 Paddle::Paddle(b2World *world) : Object(WIDTH, HEIGHT, COLOR) {
-    AddBody(world, b2_kinematicBody, 1);
-    SetPosition({Physics::PixelsToUnits(WINDOW_WIDTH / 2.0f), Physics::PixelsToUnits(WINDOW_HEIGHT)});
+    AddBody(world, b2_kinematicBody, 1, ORIGIN);
+    SetPosition({Physics::PixelsToUnits(WINDOW_WIDTH / 2.0f), Physics::PixelsToUnits(WINDOW_HEIGHT) - 1});
     SetOrigin(ORIGIN);
 }
 

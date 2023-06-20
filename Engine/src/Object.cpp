@@ -17,21 +17,21 @@ void Object::DrawToWindow(Window *window) {
 
 void Object::SetOrigin(b2Vec2 origin) {
     auto rectangleShapeSize = _rectangleShape.getSize();
-    _origin = {origin.x * Physics::PixelsToUnits(rectangleShapeSize.x), origin.y * Physics::PixelsToUnits(rectangleShapeSize.y)};
+    _originOffset = {origin.x * Physics::PixelsToUnits(rectangleShapeSize.x), origin.y * Physics::PixelsToUnits(rectangleShapeSize.y)};
     _rectangleShape.setOrigin(origin.x, origin.y);
     SetPosition(_body->GetPosition());
 }
 
 void Object::SetPosition(b2Vec2 position) {
-    _body->SetPosition(position - _origin);
+    _body->SetPosition(position - _originOffset);
 }
 
-void Object::AddBody(b2World *world, b2BodyType bodyType, float mass) {
-    _body = std::make_unique<Body>(world, Physics::PixelsToUnits(_rectangleShape.getSize().x), Physics::PixelsToUnits(_rectangleShape.getSize().y), bodyType, mass);
+void Object::AddBody(b2World *world, b2BodyType bodyType, float mass, b2Vec2 center) {
+    _body = std::make_unique<Body>(world, Physics::PixelsToUnits(_rectangleShape.getSize().x), Physics::PixelsToUnits(_rectangleShape.getSize().y), bodyType, mass, center);
 }
 
 b2Vec2 Object::GetPosition() {
-    return _body->GetPosition() + _origin;
+    return _body->GetPosition() + _originOffset;
 }
 
 Body *Object::GetBody() {

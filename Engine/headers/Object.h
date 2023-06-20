@@ -19,11 +19,11 @@ public:
     virtual void Update(Time *time) = 0;
     void SetOrigin(b2Vec2 origin);
     void SetPosition(b2Vec2 position);
-    void AddBody(b2World *world, b2BodyType bodyType, float mass);
+    void AddBody(b2World *world, b2BodyType bodyType, float mass, b2Vec2 center);
     b2Vec2 GetPosition();
     Body *GetBody();
 private:
-    b2Vec2 _origin = {0, 0};
+    b2Vec2 _originOffset = {0, 0};
     std::unique_ptr<Body> _body;
     sf::RectangleShape _rectangleShape;
 };

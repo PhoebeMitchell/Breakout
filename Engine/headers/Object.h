@@ -11,7 +11,7 @@
 #include "Window.h"
 #include "Body.h"
 
-class Object {
+class Object : public b2ContactListener {
 public:
     Object(float width, float height, sf::Color color);
 
@@ -19,7 +19,7 @@ public:
     virtual void Update(Time *time) = 0;
     void SetOrigin(b2Vec2 origin);
     void SetPosition(b2Vec2 position);
-    void AddBody(b2World *world, b2BodyType bodyType, float mass, b2Vec2 center);
+    void AddBody(b2World *world, b2BodyType bodyType, float mass, b2ContactListener *contactListener);
     b2Vec2 GetPosition();
     Body *GetBody();
 private:

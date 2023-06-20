@@ -4,7 +4,7 @@
 
 #include "../headers/Game.h"
 
-const int GRAVITY = 2;
+const int GRAVITY = 0;
 
 Game::Game(int windowWidth, int windowHeight, std::string windowName) : _window(windowWidth, windowHeight, windowName), _physics({0, GRAVITY}) {
 

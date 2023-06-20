@@ -26,8 +26,8 @@ void Object::SetPosition(b2Vec2 position) {
     _body->SetPosition(position - _originOffset);
 }
 
-void Object::AddBody(b2World *world, b2BodyType bodyType, float mass, b2Vec2 center) {
-    _body = std::make_unique<Body>(world, Physics::PixelsToUnits(_rectangleShape.getSize().x), Physics::PixelsToUnits(_rectangleShape.getSize().y), bodyType, mass, center);
+void Object::AddBody(b2World *world, b2BodyType bodyType, float mass, b2ContactListener *contactListener) {
+    _body = std::make_unique<Body>(world, Physics::PixelsToUnits(_rectangleShape.getSize().x), Physics::PixelsToUnits(_rectangleShape.getSize().y), bodyType, mass, contactListener);
 }
 
 b2Vec2 Object::GetPosition() {

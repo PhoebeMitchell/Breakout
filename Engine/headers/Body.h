@@ -9,7 +9,7 @@
 
 class Body {
 public:
-    Body(b2World *world, float width, float height, b2BodyType bodyType, float mass, b2Vec2 center);
+    Body(b2World *world, float width, float height, b2BodyType bodyType, float mass, b2ContactListener *contactListener);
 
     void SetPosition(b2Vec2 vec2);
     b2Vec2 GetPosition();

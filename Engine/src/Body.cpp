@@ -4,9 +4,10 @@
 
 #include "../headers/Body.h"
 
-Body::Body(b2World *world, float width, float height, b2BodyType bodyType, float mass, b2Vec2 center) {
+Body::Body(b2World *world, float width, float height, b2BodyType bodyType, float mass, b2ContactListener *contactListener) {
     _bodyDef.type = bodyType;
     _bodyDef.bullet = true;
+    _bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(contactListener);
     _body = world->CreateBody(&_bodyDef);
     _shape.SetAsBox(width / 2, height / 2);
     b2FixtureDef fixtureDef;

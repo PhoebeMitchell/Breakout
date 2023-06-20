@@ -13,6 +13,7 @@ public:
     Ball(b2World *world);
 
     void Update(Time *time) override;
+    void BeginContact(b2Contact *contact) override;
 private:
 };
 

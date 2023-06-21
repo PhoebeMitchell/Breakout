@@ -3,8 +3,10 @@
 //
 
 #include "../headers/Body.h"
+#include <iostream>
 
 Body::Body(b2World *world, float width, float height, b2BodyType bodyType, float mass, b2ContactListener *contactListener) {
+    _world = world;
     _bodyDef.type = bodyType;
     _bodyDef.bullet = true;
     _bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(contactListener);
@@ -14,9 +16,14 @@ Body::Body(b2World *world, float width, float height, b2BodyType bodyType, float
     fixtureDef.density = mass / (width * height);
     fixtureDef.friction = 0;
     fixtureDef.shape = &_shape;
+    fixtureDef.restitution = 1;
     _body->CreateFixture(&fixtureDef);
     _width = width;
     _height = height;
+}
+
+b2Vec2 Body::GetDimensions() {
+    return {_width, _height};
 }
 
 void Body::SetPosition(b2Vec2 vec2) {
@@ -33,4 +40,8 @@ b2Vec2 Body::GetVelocity() {
 
 void Body::SetVelocity(b2Vec2 velocity) {
     _body->SetLinearVelocity(velocity);
+}
+
+void Body::Destroy() {
+    _world->DestroyBody(_body);
 }

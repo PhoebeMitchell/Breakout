@@ -11,6 +11,10 @@ Object::Object(float width, float height, sf::Color color) {
 }
 
 void Object::DrawToWindow(Window *window) {
+    if (!_active) {
+        return;
+    }
+
     _rectangleShape.setPosition(_body->GetPosition().x * Physics::PIXELS_PER_UNIT, _body->GetPosition().y * Physics::PIXELS_PER_UNIT);
     window->Draw(&_rectangleShape);
 }
@@ -30,10 +34,25 @@ void Object::AddBody(b2World *world, b2BodyType bodyType, float mass, b2ContactL
     _body = std::make_unique<Body>(world, Physics::PixelsToUnits(_rectangleShape.getSize().x), Physics::PixelsToUnits(_rectangleShape.getSize().y), bodyType, mass, contactListener);
 }
 
+void Object::DestroyBody() {
+    _shouldDestroyBody = true;
+}
+
+void Object::Update(Time *time) {
+    if (_shouldDestroyBody) {
+        _body->Destroy();
+        _shouldDestroyBody = false;
+    }
+}
+
 b2Vec2 Object::GetPosition() {
     return _body->GetPosition() + _originOffset;
 }
 
 Body *Object::GetBody() {
     return _body.get();
+}
+
+void Object::SetActive(bool active) {
+    _active = active;
 }

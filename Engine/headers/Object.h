@@ -16,13 +16,17 @@ public:
     Object(float width, float height, sf::Color color);
 
     void DrawToWindow(Window *window);
-    virtual void Update(Time *time) = 0;
+    virtual void Update(Time *time);
     void SetOrigin(b2Vec2 origin);
     void SetPosition(b2Vec2 position);
     void AddBody(b2World *world, b2BodyType bodyType, float mass, b2ContactListener *contactListener);
+    void DestroyBody();
     b2Vec2 GetPosition();
     Body *GetBody();
+    void SetActive(bool active);
 private:
+    bool _active = true;
+    bool _shouldDestroyBody = false;
     b2Vec2 _originOffset = {0, 0};
     std::unique_ptr<Body> _body;
     sf::RectangleShape _rectangleShape;

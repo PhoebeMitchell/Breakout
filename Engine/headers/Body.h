@@ -15,7 +15,10 @@ public:
     b2Vec2 GetPosition();
     b2Vec2 GetVelocity();
     void SetVelocity(b2Vec2 velocity);
+    b2Vec2 GetDimensions();
+    void Destroy();
 private:
+    b2World *_world;
     float _width;
     float _height;
     b2BodyDef _bodyDef;

@@ -14,8 +14,9 @@ public:
     Block(b2World *world, sf::Color color);
 
     void Update(Time *time) override;
+    void Destroy();
 
-    static constexpr float WIDTH = WINDOW_WIDTH / COLUMNS;
+    static constexpr float WIDTH = 1;
     static constexpr float HEIGHT = .5f;
 private:
 };

@@ -13,11 +13,13 @@ public:
     Paddle(b2World *world);
 
     void Update(Time *time) override;
+    float CalculateBounceAngle(float otherPosition);
 private:
     const float SPEED = 5;
     static constexpr float WIDTH = 2;
     static constexpr float HEIGHT = 0.4f;
     const b2Vec2 ORIGIN = {0.5, 1};
+    const float MAX_BOUNCE_ANGLE = 90;
 };
 
 
